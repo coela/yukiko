@@ -5,6 +5,10 @@ import time
 import re
 import urllib
 import BeautifulSoup
+import socket
+
+timeout = 10
+socket.setdefaulttimeout(timeout)
 
 def handler(msg, event):
     if event == u"RECEIVED":
