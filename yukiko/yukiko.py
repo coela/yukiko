@@ -7,9 +7,9 @@ class Yukiko:
     def __init__(self):
         pass
     def maharagi(self):
-        skype = Skype4Py.Skype() # Transport="x11"
+        skype = Skype4Py.Skype(Transport='x11') # Transport="x11"
         skype.RegisterEventHandler('MessageStatus', tamaki_handler.handle)
-        skype.RegisterEventHandler('MessageStatus', ihara_handler.handle)
+#       skype.RegisterEventHandler('MessageStatus', ihara_handler.handle)
         skype.Attach()
         while True:
             time.sleep(1) 

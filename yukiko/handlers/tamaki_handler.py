@@ -1,9 +1,9 @@
 #-*- coding:utf-8 -*-
 
 import re
-import urllib
+import urllib2
 import BeautifulSoup
-
+timeout = 10
 def handle(msg, event):
     if event == u"RECEIVED":
         if re.search(u'ガンダム', msg.Body):
@@ -11,7 +11,7 @@ def handle(msg, event):
         elif re.match(u'http', msg.Body):
             msg.Chat.SendMessage(
                 BeautifulSoup.BeautifulSoup(
-                    urllib.urlopen(msg.Body)
+                    urllib2.urlopen(msg.Body,None,timeout)
                     ).title.string
                 )
         elif re.match(u'\#V-MAX', msg.Body):
