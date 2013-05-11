@@ -11,9 +11,11 @@ def handle(msg, event):
         if re.search(u'ガンダム', msg.Body):
             msg.Chat.SendMessage(u"俺がガンダムだ")
         elif re.match(u'http', msg.Body):
+            opener = urllib2.build_opener()
+						opener.addheaders = [('User-agent', 'Mozilla/5.0')]
             msg.Chat.SendMessage(
                 BeautifulSoup.BeautifulSoup(
-                    urllib2.urlopen(msg.Body,None,timeout)
+                    opener.open(msg.Body,None,timeout)
                     ).title.string
                 )
         elif re.match(u'\#V-MAX', msg.Body):
