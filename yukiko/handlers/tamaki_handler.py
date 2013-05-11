@@ -12,7 +12,7 @@ def handle(msg, event):
             msg.Chat.SendMessage(u"俺がガンダムだ")
         elif re.match(u'http', msg.Body):
             opener = urllib2.build_opener()
-						opener.addheaders = [('User-agent', 'Mozilla/5.0')]
+            opener.addheaders = [('User-agent', 'Mozilla/5.0')]
             msg.Chat.SendMessage(
                 BeautifulSoup.BeautifulSoup(
                     opener.open(msg.Body,None,timeout)
