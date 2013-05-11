@@ -2,22 +2,22 @@
 
 import re
 import urllib2
-import beautifulsoup
+import BeautifulSoup
 
 timeout = 10
 
 def handle(msg, event):
-    if event == u"received":
-        if re.search(u'ガンダム', msg.body):
-            msg.chat.sendmessage(u"俺がガンダムだ")
-        elif re.match(u'http', msg.body):
+    if event == u"RECEIVED":
+        if re.search(u'ガンダム', msg.Body):
+            msg.Chat.SendMessage(u"俺がガンダムだ")
+        elif re.match(u'http', msg.Body):
             opener = urllib2.build_opener()
             opener.addheaders = [('user-agent', 'mozilla/5.0')]
-            msg.chat.sendmessage(
-                beautifulsoup.beautifulsoup(
-                    opener.open(msg.body,None,timeout)
+            msg.Chat.SendMessage(
+                BeautifulSoup.BeautifulSoup(
+                    opener.open(msg.Body,None,timeout)
                     ).title.string
                 )
-        elif re.match(u'\#v-max', msg.body):
-            msg.chat.sendmessage(u"レディ")
+        elif re.match(u'\#v-max', msg.Body):
+            msg.Chat.SendMessage(u"レディ")
 
