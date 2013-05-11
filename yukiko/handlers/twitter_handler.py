@@ -1,21 +1,24 @@
 # -*- coding:utf-8 -*-
+import re
+import urllib2
+import beautifulsoup
 
-import urllib
-import BeautifulSoup
+timeout = 10
 
-# HTML を取得
-html = urllib.urlopen("http://cookpad.com/recipe/1069312").read()
+def handle(msg, event):
+    if event == u"received":
+        elif re.match(u'http', msg.body):
+            opener = urllib2.build_opener()
+            opener.addheaders = [('user-agent', 'mozilla/5.0')]
+						html = opener.open(msg.body,None,timeout)
+						soup = BeautifulSoup.BeautifulSoup(html)
+						twitter_context = soup.find("div", attrs={"class": "content"})
+						twitter_textArray = twitter_context.findAll("p", attrs={"class": "js-tweet-text"},text=True)
+						twitter_text = u''.join(twitter_textArray)
+						twitter_time = twitter_context.find("p",attrs={"class": "tweet-timestamp js-permalink js-nav"}['title'] )
 
-# 解析用の BeautifulSoup オブジェクトを作成
-soup = BeautifulSoup.BeautifulSoup(html)
+            msg.chat.sendmessage(
+                beautifulsoup.beautifulsoup(
+									twitter_text + u'[' + twitter_time + ']'
+                )
 
-# レシピのメイン部を取得
-recipe_main = soup.find("div", attrs={"id": "recipe-main"})
-
-# レシピのタイトルを取得
-recipe_title = recipe_main.find("h1", attrs={"class": "recipe-title fn"})
-print(recipe_title.string)
-
-# 材料を取得
-for ingredient in recipe_main.findAll("div", attrs={"class": "ingredient_name"}):
-	    print(ingredient.string)
