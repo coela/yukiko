@@ -16,7 +16,7 @@ def handle(msg, event):
             msg.Chat.SendMessage(
                 BeautifulSoup.BeautifulSoup(
                     opener.open(msg.Body,None,timeout)
-                    ).title.string
+                    ).title.string.replace('&#10;',"")
                 )
         elif re.match(u'\#v-max', msg.Body):
             msg.Chat.SendMessage(u"レディ")

@@ -16,9 +16,8 @@ def handle(msg, event):
             twitter_textArray = twitter_context.find("p", attrs={"class": "js-tweet-text"})
             twitter_text = u''.join(twitter_textArray.findAll(text=True))
             twitter_time = twitter_context.find("a",attrs={"class": "tweet-timestamp js-permalink js-nav"})['title']
-            print twitter_time
-
+            r = twitter_text.replace('&#10;',"\n")
             msg.Chat.SendMessage(
-                twitter_text + u'\n[' + twitter_time + ']'
+                r + u'\n[' + twitter_time + ']'
                 )
 
