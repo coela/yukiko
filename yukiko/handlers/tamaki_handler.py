@@ -26,7 +26,7 @@ def handle(msg, event):
 
             enc = soup.originalEncoding
             title = soup.title.string
-            hoge = unescape(title)
+            hoge = unescape(title).replace("\n",'')
             msg.Chat.SendMessage(
                     hoge
                )
