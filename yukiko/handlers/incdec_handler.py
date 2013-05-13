@@ -15,8 +15,8 @@ try:
 except:
     score = {}
 
-inc = re.compile(r'([^-+\s]+)\+\+(\+)*')
-dec = re.compile(r'([^-+\s]+)\-\-(-)*')
+inc = re.compile(r'([^-+\s]+)\+\+(\+*)$')
+dec = re.compile(r'([^-+\s]+)\-\-(\-*)$')
 
 def handle(msg, event):
     if event == u"RECEIVED":
@@ -40,6 +40,7 @@ def handle(msg, event):
             score.setdefault(decmatch.group(1), 0)
             mojinaga = 0
             if ( decmatch.group(2)):
+                print decmatch.group(2) 
                 mojinaga = len(decmatch.group(2))
             score[decmatch.group(1)] -= (1 + mojinaga)
             f2 = file('data/score.dump', 'w')
