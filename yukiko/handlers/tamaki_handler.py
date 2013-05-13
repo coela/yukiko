@@ -15,14 +15,14 @@ def handle(msg, event):
             msg.Chat.SendMessage(u"俺がガンダムだ")
         elif re.match(u'http', msg.Body):
             opener = urllib2.build_opener()
-            opener.addheaders = [('user-agent', 'mozilla/5.0')]
+            opener.addheaders = [('User-agent', 'Mozilla/5.0')]
             html = opener.open(msg.Body,None,timeout)
-
+           
             try:
                 soup = BeautifulSoup.BeautifulSoup(html,convertEntities=BeautifulSoup.BeautifulSoup.HTML_ENTITIES)
             except (TypeError, UnicodeError):
                 soup = testKnownEncodings(html)            
-
+            
             title = soup.title.string.replace("\n",'')
             msg.Chat.SendMessage(
                     title
