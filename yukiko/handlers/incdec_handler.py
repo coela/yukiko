@@ -19,7 +19,9 @@ inc = re.compile(r'(\S+)\+\+')
 dec = re.compile(r'(\S+)\-\-')
 
 def handle(msg, event):
-        incmatch = inc.search(msg.Body)
+    if event == u"RECEIVED":
+
+        incmatch = inc.match(msg.Body)
         if incmatch:
             print incmatch.group(1)
             score.setdefault(incmatch.group(1), 0)
@@ -29,7 +31,7 @@ def handle(msg, event):
             f2.close()
             msg.Chat.SendMessage(u'( ' + incmatch.group(1) + u': 累計 ' + str(score[incmatch.group(1)]) + u' )' )
 
-        decmatch = dec.search(msg.Body)
+        decmatch = dec.match(msg.Body)
         if decmatch:
             print decmatch.group(1) 
             score.setdefault(decmatch.group(1), 0)
