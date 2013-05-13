@@ -15,17 +15,20 @@ try:
 except:
     score = {}
 
-inc = re.compile(r'(\S+)\+\+')
-dec = re.compile(r'(\S+)\-\-')
+inc = re.compile(r'([^-+\s]+)\+\+(\+)*')
+dec = re.compile(r'([^-+\s]+)\-\-(-)*')
 
 def handle(msg, event):
     if event == u"RECEIVED":
-
+        print msg.Body
         incmatch = inc.match(msg.Body)
         if incmatch:
             print incmatch.group(1)
             score.setdefault(incmatch.group(1), 0)
-            score[incmatch.group(1)] += 1
+            mojinaga = 0
+            if ( incmatch.group(2)):
+                mojinaga = len(incmatch.group(2))
+            score[incmatch.group(1)] += ( 1 + mojinaga)
             f2 = file('data/score.dump', 'w')
             pickle.dump(score, f2)
             f2.close()
@@ -35,7 +38,10 @@ def handle(msg, event):
         if decmatch:
             print decmatch.group(1) 
             score.setdefault(decmatch.group(1), 0)
-            score[decmatch.group(1)] -= 1
+            mojinaga = 0
+            if ( decmatch.group(2)):
+                mojinaga = len(decmatch.group(2))
+            score[decmatch.group(1)] -= (1 + mojinaga)
             f2 = file('data/score.dump', 'w')
             pickle.dump(score, f2)
             f2.close()

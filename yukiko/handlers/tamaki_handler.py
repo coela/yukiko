@@ -27,7 +27,7 @@ def handle(msg, event):
             msg.Chat.SendMessage(
                     title
                )
-        elif re.match(u'\#v-max', msg.Body):
+        elif re.match(u'\#V-MAX', msg.Body):
             msg.Chat.SendMessage(u"レディ")
 
 def testKnownEncodings(html):
