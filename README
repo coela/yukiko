@@ -1,5 +1,5 @@
 Install dependencies:
-  pip install -r requeirements.txt
+  pip install -r requirements.txt
 
 Execute on MacOSX(32bit mode):
   VERSIONER_PYTHON_PREFER_32_BIT=yes python scripts/yukiko_bot.py OSX
