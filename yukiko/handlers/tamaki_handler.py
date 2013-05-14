@@ -31,7 +31,7 @@ def handle(msg, event):
             msg.Chat.SendMessage(u"レディ")
 
 def testKnownEncodings(html):
-  for e in knownEncodings:
+  for e in KNOWN_ENCODINGS:
     try:
       soup = BeautifulSoup.BeautifulSoup(html, fromEncoding = e,convertEntities=BeautifulSoup.BeautifulSoup.HTML_ENTITIES)
       return soup
