@@ -3,3 +3,6 @@ Install dependencies:
 
 Execute on MacOSX(32bit mode):
   VERSIONER_PYTHON_PREFER_32_BIT=yes python scripts/yukiko_bot.py
+
+Execute on Non GUI environment(32bit mode):
+	env DISPLAY=:20 XAUTHORITY=/var/run/skype/Xauthority VERSIONER_PYTHON_PREFER_32_BIT=yes python scripts/yukiko_bot.py
